@@ -1,11 +1,13 @@
-# gmaps_popular_times_scraper
+# Scraper for Google Maps "Popular Times" for business entries
 
-Scraper for Google Maps "Popular Times" for business entries
+Turn this:
 
 ![screenshot of google maps popular times](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/cda149635043e9179d12187f637597bfcc11d235/gmaps_popular_times.png)
 
+into a machine readable dataset. YMMV.
 
-# to get the code
+
+## to get the code
 
     git clone https://github.com/philshem/gmaps_popular_times_scraper.git
     cd gmaps_popular_times_scraper
@@ -18,6 +20,8 @@ Modify these lines in the code `scrape_gm.py` to point to your path of Chrome an
 
     options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
     chrome_driver_binary = "/usr/local/bin/chromedriver"
+
+## to run the code
 
 Run the scraper by putting a URL as the system argument:
 
@@ -32,6 +36,8 @@ Or a shortened one:
     https://goo.gl/maps/r2xowUB3UZX7ZL2u6
 
 Note that the html page source will be saved to the folder `html/`
+
+## results
 
 The output data will have this format
 
@@ -75,6 +81,7 @@ Der_Grüne_Libanon,Saturday,22,0
 Der_Grüne_Libanon,Saturday,23,0
 ```
 
+## dataviz
 
 And to visualize the data for a week of one Kebab shop in Zürich (note that Friday at 12 is max crowd!)
 
