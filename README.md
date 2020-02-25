@@ -1,4 +1,4 @@
-# Scraper for Google Maps "Popular Times" for business entries
+# Scraper of Google Maps "Popular Times" for business entries
 
 Turn this:
 
