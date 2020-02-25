@@ -20,6 +20,8 @@ Modify these lines in the code `scrape_gm.py` to point to your path of Chrome an
     options.binary_location = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
     chrome_driver_binary = "/usr/local/bin/chromedriver"
 
+Chromedriver downloads are [here](https://sites.google.com/a/chromium.org/chromedriver/downloads). Make sure you use the version that matches your Chrome.
+
 ## to run the code
 
 Run the scraper by putting a URL as the system argument:
