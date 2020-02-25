@@ -2,17 +2,16 @@
 
 Turn this:
 
-![screenshot of google maps popular times](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/cda149635043e9179d12187f637597bfcc11d235/gmaps_popular_times.png)
+![screenshot of google maps popular times](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/ab2530b4b3bfab57f4fe65ddc58792f4bb76758e/gmaps_popular_times.png)
 
-into a machine readable dataset. YMMV.
-
+into a machine readable dataset. (This is really unofficial. YMMV.)
 
 ## to get the code
 
     git clone https://github.com/philshem/gmaps_popular_times_scraper.git
     cd gmaps_popular_times_scraper
 
-Install required packages (beautifulsoup4 and selenium)
+Install required packages ([selenium](https://pypi.org/project/selenium/) and [beautifulsoup4](https://pypi.org/project/beautifulsoup4/))
 
     pip3 install -r requirements.txt
 
@@ -39,7 +38,7 @@ Note that the html page source will be saved to the folder `html/`
 
 ## results
 
-The output data will have this format
+The output data ([sample_output.csv](https://raw.githubusercontent.com/philshem/gmaps_popular_times_scraper/master/sample_output.csv)) has this structure (abbreviated):
 
 ```
 Der_Grüne_Libanon,Sunday,6,0
