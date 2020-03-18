@@ -22,7 +22,7 @@ Modify these lines in the code `scrape_gm.py` to point to your path of Chrome an
 
 Chromedriver downloads are [here](https://sites.google.com/a/chromium.org/chromedriver/downloads). Make sure you use the version that matches your Chrome.
 
-## to run the code
+## to run the code
 
 Run the scraper by putting a URL as the system argument:
 
