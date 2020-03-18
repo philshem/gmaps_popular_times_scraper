@@ -1,7 +1,7 @@
 import os
 
 # give time to download map tiles
-SLEEP_SEC = 20.0
+SLEEP_SEC = 30.0
 
 # csv output delimiter
 DELIM = ','
