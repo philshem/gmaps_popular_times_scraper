@@ -62,9 +62,9 @@ def main():
 				# write data
 				for row in data:
 					f.write(config.DELIM.join((file_name,url,run_time)) + config.DELIM + config.DELIM.join([str(x or '') for x in row])+'\n')
-			
+
 			print('DONE:', url, run_time)
-			
+
 		else:
 			print('WARNING: no data', url, run_time)
 
@@ -115,8 +115,8 @@ def get_html(u,file_name):
 		# https://stackoverflow.com/a/55152213/2327328
 		# I choose German because the time is 24h, less to parse
 		options.add_argument('--lang=de-DE')
-		options.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-		chrome_driver_binary = '/usr/local/bin/chromedriver'
+		options.binary_location = config.CHROME_BINARY_LOCATION
+		chrome_driver_binary = config.CHROMEDRIVER_BINARY_LOCATION
 		d = webdriver.Chrome(chrome_driver_binary, options=options)
 
 		# get page
@@ -164,7 +164,7 @@ def parse_html(html):
 				# hour is the previous value + 1
 				hour = hour + 1
 				freq = int(t.split()[-2])
-				
+
 				# gmaps gives the current popularity,
 				# but only the current hour has it
 				try:
