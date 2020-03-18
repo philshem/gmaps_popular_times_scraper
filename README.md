@@ -26,9 +26,14 @@ Chromedriver downloads are [here](https://sites.google.com/a/chromium.org/chrome
 
 Run the scraper by putting a URL as the system argument:
 
-    python3 scrape_gm.py $URL
+    python3 scrape_gm.py "$URL_TO_CSV"
 
-The URL can be a full google maps URL
+or specifically for a google sheets
+
+    python scrape_gm.py "https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
+
+The URL should point to any CSV (local or http) that has as the first column a valid google maps url.
+For example:
 
     https://www.google.com/maps/place/Der+Gr%C3%BCne+Libanon/@47.3809042,8.5325368,17z/data=!3m1!4b1!4m5!3m4!1s0x47900a0e662015b7:0x54fec14b60b7f528!8m2!3d47.3809006!4d8.5347255
 
@@ -36,51 +41,24 @@ Or a shortened one:
 
     https://goo.gl/maps/r2xowUB3UZX7ZL2u6
 
-Note that the html page source will be saved to the folder `html/`
+Note that the html page source will be saved to the folder `html/`. The html files are saved as an cache, with a timestamp for when they were retrieved, and should be cleaned out once in a while. Logs are saved to `logs/`.
 
 ## results
 
 The output data ([sample_output.csv](https://raw.githubusercontent.com/philshem/gmaps_popular_times_scraper/master/sample_output.csv)) has this structure (abbreviated):
 
 ```
-Der_Grüne_Libanon,Sunday,6,0
-Der_Grüne_Libanon,Sunday,7,0
-Der_Grüne_Libanon,Sunday,8,0
-Der_Grüne_Libanon,Sunday,9,0
-Der_Grüne_Libanon,Sunday,10,1
-Der_Grüne_Libanon,Sunday,11,10
-Der_Grüne_Libanon,Sunday,12,33
-Der_Grüne_Libanon,Sunday,13,61
-Der_Grüne_Libanon,Sunday,14,69
-Der_Grüne_Libanon,Sunday,15,50
-Der_Grüne_Libanon,Sunday,16,38
-Der_Grüne_Libanon,Sunday,17,53
-Der_Grüne_Libanon,Sunday,18,55
-Der_Grüne_Libanon,Sunday,19,27
-Der_Grüne_Libanon,Sunday,20,0
-Der_Grüne_Libanon,Sunday,21,0
-Der_Grüne_Libanon,Sunday,22,0
-Der_Grüne_Libanon,Sunday,23,0
-...
-Der_Grüne_Libanon,Saturday,6,0
-Der_Grüne_Libanon,Saturday,7,0
-Der_Grüne_Libanon,Saturday,8,0
-Der_Grüne_Libanon,Saturday,9,0
-Der_Grüne_Libanon,Saturday,10,3
-Der_Grüne_Libanon,Saturday,11,19
-Der_Grüne_Libanon,Saturday,12,56
-Der_Grüne_Libanon,Saturday,13,76
-Der_Grüne_Libanon,Saturday,14,64
-Der_Grüne_Libanon,Saturday,15,57
-Der_Grüne_Libanon,Saturday,16,58
-Der_Grüne_Libanon,Saturday,17,53
-Der_Grüne_Libanon,Saturday,18,41
-Der_Grüne_Libanon,Saturday,19,26
-Der_Grüne_Libanon,Saturday,20,0
-Der_Grüne_Libanon,Saturday,21,0
-Der_Grüne_Libanon,Saturday,22,0
-Der_Grüne_Libanon,Saturday,23,0
-```
+place,url,scrape_time,day_of_week,hour_of_day,popularity_percent_normal,popularity_percent_current
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,13,38,
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,14,45,
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,15,61,
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,16,79,30
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,17,90,
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,18,88,```
+
+Data in csv format is saved to `data/`. You can use the code ([csv2sql.py](https://raw.githubusercontent.com/philshem/gmaps_popular_times_scraper/master/csv2sql.py)) to convert to a SQLite3 database. Or this [awk command](https://stackoverflow.com/a/40922632/2327328)
+
+    awk 'FNR==NR||FNR>2' data/*.csv > all.csv
 
 ## dataviz
 
