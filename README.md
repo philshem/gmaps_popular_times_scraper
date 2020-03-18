@@ -54,7 +54,8 @@ AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesda
 AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,15,61,
 AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,16,79,30
 AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,17,90,
-AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,18,88,```
+AnRYn1F8NfSGLexf7,https://goo.gl/maps/AnRYn1F8NfSGLexf7,20200318_163629,Wednesday,18,88,
+```
 
 Data in csv format is saved to `data/`. You can use the code ([csv2sql.py](https://raw.githubusercontent.com/philshem/gmaps_popular_times_scraper/master/csv2sql.py)) to convert to a SQLite3 database. Or this [awk command](https://stackoverflow.com/a/40922632/2327328)
 
