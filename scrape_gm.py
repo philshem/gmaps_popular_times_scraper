@@ -9,6 +9,10 @@ import sys
 import time
 import urllib.parse
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 from datetime import datetime
 import pandas as pd
@@ -123,7 +127,12 @@ def get_html(u,file_name):
 		d.get(u)
 
 		# sleep to let the page render, it can take some time
-		time.sleep(config.SLEEP_SEC)
+		# timeout after max N seconds (config.py)
+		# based on https://stackoverflow.com/questions/26566799/wait-until-page-is-loaded-with-selenium-webdriver-for-python
+		try:
+			WebDriverWait(d, config.SLEEP_SEC).until(EC.presence_of_element_located((By.CLASS_NAME, 'section-popular-times-bar')))
+		except TimeoutException:
+			print('ERROR: Timeout! (This could be due to missing "popular times" data, or not enough waiting.)',u)
 
 		# save html local file
 		if config.SAVE_HTML:
