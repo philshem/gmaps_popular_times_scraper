@@ -2,7 +2,7 @@
 
 Turn this:
 
-![screenshot of google maps popular times](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/ab2530b4b3bfab57f4fe65ddc58792f4bb76758e/gmaps_popular_times.png)
+![screenshot of google maps popular times](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/2fca83a2841057af7bf111bd3e99259cc109f5dc/google_maps_scraper.png)
 
 into a machine readable dataset. (This is really unofficial. YMMV.)
 
@@ -70,35 +70,3 @@ Data in csv format is saved to `data/`. You can use the code ([csv2sql.py](https
 And to visualize the data for a week of one Kebab shop in Zürich (note that Friday at 12 is max crowd!)
 
 ![shawarma popularity](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/ab2530b4b3bfab57f4fe65ddc58792f4bb76758e/shawarma_popularity.png)
-
-
-## other
-
-upload to public bucket
-
-```
-cd /home/philip/gmaps_popular_times_scraper
-# upload all raw csvs to bucket
-gsutil -m cp -n data/*.csv gs://kantonzh-covid-hkfsaqgshw/gmaps_scrape/raw_data/
-
-# concat all csv files into one big one, upload to bucket
-awk 'FNR==NR||FNR>2' data/*.csv > all.csv && gsutil -m cp all.csv gs://kantonzh-covid-hkfsaqgshw/gmaps_scrape/
-
-# from that big csv, only print lines that do not end with a comma, which are valid for comparing actual and current
-# and upload to bucket
-awk '!/[,]$/' all.csv > all_valid.csv && gsutil -m cp all_valid.csv gs://kantonzh-covid-hkfsaqgshw/gmaps_scrape/
-```
-
-run script
-
-```
-cd /home/philip/gmaps_popular_times_scraper
-/usr/bin/python3 scrape_gm.py "https://docs.google.com/spreadsheets/d/1KDqquW2axaUM9Z62JbyppuPq09IpAZRSIpPLb08nVqQ/gviz/tq?tqx=out:csv&sheet=Sheet1" >> out.log
-```
-
-crontab
-
-```
-30 * * * * /home/philip/gmaps_popular_times_scraper/./run.sh >> /home/philip/gmaps_popular_times_scraper/cron.log
-00 * * * * /home/philip/gmaps_popular_times_scraper/./upload.sh >> /home/philip/gmaps_popular_times_scraper/cron_upload.log
-```
