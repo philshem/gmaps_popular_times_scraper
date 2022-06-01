@@ -9,6 +9,7 @@ import sys
 import time
 import urllib.parse
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -112,16 +113,19 @@ def get_html(u,file_name):
 		return html
 
 	else:
-		# requires chromedriver
-		options = webdriver.ChromeOptions()
-		#options.add_argument('--start-maximized')
-		options.add_argument('--headless')
-		# https://stackoverflow.com/a/55152213/2327328
-		# I choose German because the time is 24h, less to parse
-		options.add_argument('--lang=de-DE')
-		options.binary_location = config.CHROME_BINARY_LOCATION
-		chrome_driver_binary = config.CHROMEDRIVER_BINARY_LOCATION
-		d = webdriver.Chrome(chrome_driver_binary, options=options)
+		if config.REMOTE_CHROME_URL != '':
+			d = webdriver.Remote(config.REMOTE_CHROME_URL, DesiredCapabilities.CHROME)
+		else:
+			# requires chromedriver
+			options = webdriver.ChromeOptions()
+			#options.add_argument('--start-maximized')
+			options.add_argument('--headless')
+			# https://stackoverflow.com/a/55152213/2327328
+			# I choose German because the time is 24h, less to parse
+			options.add_argument('--lang=de-DE')
+			options.binary_location = config.CHROME_BINARY_LOCATION
+			chrome_driver_binary = config.CHROMEDRIVER_BINARY_LOCATION
+			d = webdriver.Chrome(chrome_driver_binary, options=options)
 
 		# get page
 		d.get(u)
@@ -130,7 +134,7 @@ def get_html(u,file_name):
 		# timeout after max N seconds (config.py)
 		# based on https://stackoverflow.com/questions/26566799/wait-until-page-is-loaded-with-selenium-webdriver-for-python
 		try:
-			WebDriverWait(d, config.SLEEP_SEC).until(EC.presence_of_element_located((By.CLASS_NAME, 'section-popular-times-bar')))
+			WebDriverWait(d, config.SLEEP_SEC).until(EC.presence_of_element_located((By.CLASS_NAME, 'C7xf8b')))
 		except TimeoutException:
 			print('ERROR: Timeout! (This could be due to missing "popular times" data, or not enough waiting.)',u)
 
