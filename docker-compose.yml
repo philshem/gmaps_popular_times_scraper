@@ -1,0 +1,20 @@
+version: "3.3"
+services:
+  chrome:
+    image: selenium/standalone-chrome:latest
+    privileged: true
+    ports:
+      - 4444:4444
+    environment:
+      - VNC_NO_PASSWORD=1
+    shm_size: 2g
+  gmaps-scraper:
+    container_name: gmaps-scraper
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      REMOTE_CHROME_URL: 'http://chrome:4444'
+    entrypoint: tail -F /dev/null
+    volumes: 
+      - .:/project

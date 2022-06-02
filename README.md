@@ -70,3 +70,27 @@ Data in csv format is saved to `data/`. You can use the code ([csv2sql.py](https
 And to visualize the data for a week of one Kebab shop in Zürich (note that Friday at 12 is max crowd!)
 
 ![shawarma popularity](https://gist.githubusercontent.com/philshem/71507d4e8ecfabad252fbdf4d9f8bdd2/raw/ab2530b4b3bfab57f4fe65ddc58792f4bb76758e/shawarma_popularity.png)
+
+## Dockerized local development
+
+Requirements:
+- Docker engine
+- docker-compose, minimum version: 3.3
+
+Just run:
+
+```bash
+./docker-bootstrap-env.sh
+```
+
+This will:
+- build the Docker image (python with the necessary requirements installed)
+- run `docker-compose up -d`, this will start the selenium standalone chrome server and the docker container with python and the necessary requirements
+- exec into the python docker container
+
+At the end you will have a complete environment and you can just run `python3 scrape_gm.py "$URL_TO_CSV"` inside the container and it will start the scraping.
+
+Volume mapping:
+- The root of the repository is mapped into the container to the /project path. The container's workdir is also /project.
+- Because of this volume mapping any change that you make locally is going to be reflected instantly in the docker container. And any files created by the container under the /project path will be available on the host machine.
+- You only need to rebuild the docker image in case you add new dependencies to requirements.txt
